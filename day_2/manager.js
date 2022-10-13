@@ -1,10 +1,6 @@
-
-
 const input = require('readline-sync');
 let taskList = ['1 first', '2 second', '3 third'];
 const menu = ['Welcome to your task manager, Press:', '1. to see all your tasks', '2. to add a task', '3. to delete a task', '4. to mark a task as done', '5. to Exit the task manager' ]
-// let info = input.question("Question text... ");
-// console.log(info);
 let infinity = true;
 const readMenu = () => {
     for (const iterator of menu) {
@@ -26,16 +22,12 @@ const addTask = () => {
 
 const removeTask = () => {
     let reply = input.question("Enter the number of a task that you want to be removed?");
-    // console.log(reply);
     taskList.splice(Number(reply) - 1, 1);
     for(let i = 0; i < taskList.length; i++) {
-        let task = taskList[i];
-        
+        let task = taskList[i];        
         let char = task[0];
-        let replaced = task.replace(char, (i + 1));
-        
-        taskList[i] = replaced;
-        
+        let replaced = task.replace(char, (i + 1));        
+        taskList[i] = replaced;        
     }
 }
 
@@ -47,10 +39,8 @@ const markDone = () => {
 
 const wrongChoise = () => {
     let reply = Number(input.question((' You have to enter the number from 1 to 5, try again. Please make your choise')));
-    
-    while(true) {
-        // console.log("You have to enter the number from 1 to 5, try again");
-        
+
+    while(true) {       
         if (reply > 0 && reply < 6) {
             console.log("Well done");           
             break;
@@ -76,9 +66,7 @@ const wellDone = (answer) => {
         infinity = false;
     }
 }
-function manager() {
-     
-    // let reply = 0;
+const manager = () => {   
     let i = 1
     while(infinity) {
         readMenu();
@@ -93,6 +81,3 @@ function manager() {
 }
 
 manager()
-// readTasks();
-// markDone();
-// readTasks()
