@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploring the DOM</title>
+
+  <!-- <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="script.js"></script> -->
+</head>
+<body>
+  <header>
+    <h1>BeCode DOM exploration | <strong>Navigate</strong></h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>The first section</h2>
+
+      <p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, nesciunt incidunt accusantium quaerat aliquid ullam distinctio, mollitia iure, id tempore repellat soluta officia quisquam rerum. Nesciunt explicabo adipisci maiores totam.
+      </p>
+
+      <p>
+        A list of things that matters
+        <ol>
+          <li>Sleep well</li>
+          <li>Eat well</li>
+          <li>Self care</li>
+          <li>Learning to code</li>
+          <li>The Fast and Furious film franchise</li>
+        </ol>
+      </p>
+    </section>
+
+    <section>
+      <h2>The third section</h2>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident dolorem explicabo in fugiat natus. Illum, cum exercitationem? Earum doloribus esse velit expedita illo hic enim, sed voluptatem, omnis officia ipsam!</p>
+    </section>
+
+    <section>
+      <div>
+        <h2>The second section</h2>
+
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium, dolor dolorem dolores eaque animi sint facere aperiam ducimus deleniti! A doloribus quo iste animi inventore laborum amet ea cumque suscipit?</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    This is the footer, you should know that already
+  </footer>
+  <script>
+//     Select the last child of the <ol> tag and put it at the beginning of the list
+// Move the <h2> of the third section in the second one and vice-versa
+// Delete the last section from the DOM, we don't need it anyways
+const movingLi = () => {
+let uList = document.querySelector('ol');
+let lastChild = document.querySelector('li:last-child')
+console.log(lastChild.innerText);
+uList.prepend(lastChild);
+}
+
+const movingH2 = () => {
+
+    const secondSection = document.querySelector('section:nth-child(2)');
+    const divH2 = document.querySelector('section:last-child').firstElementChild;
+    // console.log(divH2.children)
+    // console.log(divH2)
+
+    const secondH2 = secondSection.firstElementChild;
+    // console.log(secondH2)
+
+    const thirdH2 = divH2.firstElementChild;
+    // console.log(thirdH2)
+
+    secondSection.prepend(thirdH2);
+
+    divH2.prepend(secondH2);
+
+
+
+}
+
+const lastSection = () => {
+   let toRemove = document.querySelector('section:last-child');
+   console.log(toRemove);
+   toRemove.remove();
+   
+}
+
+let sections = document.querySelectorAll('section');
+
+sections[1].querySelector('h2')
+
+
+
+lastSection();
+// movingLi();
+// movingH2();
+
+
+
+
+
+
+  </script>
+</body>
+</html>

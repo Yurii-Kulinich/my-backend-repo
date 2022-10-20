@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exploring the DOM</title>
+
+  <!-- <link rel="stylesheet" href="../assets/style.css">
+  <script defer src="script.js"></script> -->
+</head>
+<body>
+  <header>
+    <h1>BeCode DOM exploration | <strong>Forms</strong></h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Display your firstname</h2>
+
+      <input type="text" name="firstname" id="firstname"/>
+      <span id="display-firstname"></span>
+    </section>
+
+    <section>
+      <h2>Are you old enough to see this?</h2>
+
+      <input type="number" name="age" id="age" />
+      <section id="a-hard-truth" style="visibility: hidden;">
+        Being an adult is not fun, everybody would rather remain a child, especially when it's time to pay the bills.
+      </section>
+    </section>
+
+    <section>
+      <h2>Password verifier</h2>
+
+      <p>Well you know the drill. Choose a password thats at least 6 characters long. And enter the same password twice</p>
+
+      <div>
+        <input type="password" name="pwd" id="pwd" />
+      </div>
+
+      <div>
+        <input type="password" name="pwd-confirm" id="pwd-confirm" />
+      </div>
+    </section>
+
+    <section>
+      <h2>Mode selector</h2>
+
+      <select name="toggle-darkmode" id="toggle-darkmode">
+        <option value="dark">Dark Mode</option>
+        <option value="light" selected>Light Mode</option>
+      </select>
+    </section>
+  </main>
+
+  <footer>
+    At this point you should know that there is nothing interesting in this footer
+  </footer>
+
+  <script>
+    //global const
+
+    const firstInput = document.querySelector('#firstname');
+    const nameSpan = document.querySelector('#display-firstname');
+
+    const userAge = document.querySelector('#age');
+    const truth = document.querySelector('#a-hard-truth');
+
+    const firstPassword = document.querySelector('#pwd');
+    const secondPassword = document.querySelector('#pwd-confirm');
+
+    const mode = document.querySelector('#toggle-darkmode');
+
+    const bodyElement = document.querySelector('body');
+
+
+    //event listeners
+
+    firstInput.addEventListener('keyup', displayName);
+
+    userAge.addEventListener('keyup', displayTruth);
+    firstPassword.addEventListener('keyup', warningPassShort);
+
+    secondPassword.addEventListener('keyup', warningPassShort);
+    secondPassword.addEventListener('keyup', warningPassMatch);
+
+    mode.addEventListener('change', swithTheme);
+
+    function displayName(e) {
+        nameSpan.innerText += e.key;
+        if(e.code === 'Backspace') {
+            nameSpan.innerText = '';
+            firstInput.value = '';
+        }
+    }
+
+    function displayTruth(e) {
+        if (userAge.value){ 
+            if( userAge.value > 18)truth.style.visibility = 'visible';     
+    }
+    }
+
+    function warningPassShort() {
+        
+        if(this.value.length < 6) this.style.backgroundColor = 'red';
+        else(this.style.backgroundColor = 'white');
+        
+    }
+    function warningPassMatch(){
+        if(this.value.length >=6) {
+        if(firstPassword.value !== secondPassword.value) alert('Passwords dont match');
+        }
+    }
+
+    function swithTheme (e) {
+        if (e.target.value === 'dark') {
+            bodyElement.style.backgroundColor = 'black';
+            bodyElement.style.color = 'white';
+        }
+        else if(e.target.value === 'light') {
+            bodyElement.style.backgroundColor = 'white';
+            bodyElement.style.color = 'black';
+        }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM events</title>
+
+  <link rel="stylesheet" href="style.css">
+  <!-- <script defer src="script.js"></script> -->
+</head>
+<body>
+
+  <main>
+    <section class="displayedquare-wrapper">
+      <!-- Dynamically put the squares in here -->
+    </section>
+
+    <section>
+      <div class="actionsquare-wrapper">
+        <div class="actionsquare green"></div>
+        <div class="actionsquare violet"></div>
+        <div class="actionsquare orange"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Action log</h2>
+
+      <ul>
+        <!-- Dynamically put the logs in here -->
+      </ul>
+    </section>
+  </main>
+  <script>
+    // global variables
+    let squareGreen = document.querySelector('.actionsquare.green');
+    let squareViolet = document.querySelector('.actionsquare.violet');
+    let squareOrange = document.querySelector('.actionsquare.orange');
+    const myList = document.querySelector('ul');
+
+    const newSquares = document.querySelector('.displayedquare-wrapper');
+
+    
+    
+    const globalDate = Date.now();
+
+    // click events
+   
+    squareGreen.addEventListener('click', newSquareGreen) 
+    squareViolet.addEventListener('click', newSquareViolet) 
+    squareOrange.addEventListener('click', newSquareOrange) 
+
+
+    
+    function newSquareGreen(){
+        let displaySection = document.querySelector('.displayedquare-wrapper');
+        let squareGreen = document.createElement('div');
+        squareGreen.style.backgroundColor = 'lime';
+        squareGreen.classList.add("displayedsquare");
+        squareGreen.setAttribute("onclick", "alert('color: green')")
+        displaySection.append(squareGreen);
+        
+      
+
+        let newItem = document.createElement('li');
+        let currentTime = (Date.now() - globalDate)/1000;
+        newItem.innerText = `[${currentTime}s]  new Green Element was created`;
+        myList.append(newItem);
+
+    }
+
+    function newSquareViolet(){
+        let displaySection = document.querySelector('.displayedquare-wrapper');
+        
+        let squareGreen = document.createElement('div');
+        squareGreen.style.backgroundColor = 'magenta';
+        squareGreen.classList.add("displayedsquare");
+        displaySection.append(squareGreen);
+        squareGreen.setAttribute("onclick", "alert('color: violet')")
+
+        let myList = document.querySelector('ul');
+
+        let newItem = document.createElement('li');
+        let currentTime = (Date.now() - globalDate)/1000;
+        newItem.innerText = `[${currentTime}s]  new Violet Element was created`;
+        myList.append(newItem);
+
+
+    }
+
+    function newSquareOrange(){
+        let displaySection = document.querySelector('.displayedquare-wrapper');
+        
+        let squareGreen = document.createElement('div');
+        squareGreen.style.backgroundColor = 'orange';
+        squareGreen.classList.add("displayedsquare");
+        displaySection.append(squareGreen);
+        squareGreen.setAttribute("onclick", "alert('color: orange')")
+
+        
+        let newItem = document.createElement('li');
+        let currentTime = (Date.now() - globalDate)/1000;
+        newItem.innerText = `[${currentTime}s]  new Orange Element was created`;
+        myList.append(newItem);
+
+    }
+
+    //keyboard events
+    
+    const bodyElement = document.querySelector('body');
+
+    bodyElement.addEventListener('keydown', changingColor);
+
+    function changingColor(e) {
+      
+      if (e.code === 'Space') {
+        bodyElement.style.backgroundColor = getRandomColor();
+        let newItem = document.createElement('li');
+        let currentTime = (Date.now() - globalDate)/1000;
+        newItem.innerText = `[${currentTime}s]  Space was pressed`;
+        myList.append(newItem);
+      } else if (e.code === "KeyL") myList.innerHTML = '';
+        else if (e.code === "KeyS") newSquares.innerHTML = '';
+    }
+
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+    
+    
+    
+  </script>
+</body>
+</html>
